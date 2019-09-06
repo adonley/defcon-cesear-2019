@@ -2,6 +2,7 @@ from functools import reduce
 from itertools import permutations
 from typing import Mapping, Tuple, Iterator, List
 import csv
+import enchant
 
 table = {
     0: '+',
@@ -183,12 +184,13 @@ def main():
                 url += str(chr(number))
             t.append(url)
     with open("ouput.txt", 'w') as f:
+        d = enchant.Dict("en_US")
         for u in t:
-            # Make sure it's within the anscii table we're interested in
-            if not all(32 < e < 177 for e in u):
-                continue
-            f.write(u)
-            f.write("\n")
+            word_list = u.split(' ')
+            if len(word_list) > 0 and word_list[0] is not None and all([33 < ord(e) for e in word_list[0]]) and d.check(word_list[0]):
+                print(u)
+                f.write(u)
+                f.write("\n")
 
 
 if __name__ == "__main__":

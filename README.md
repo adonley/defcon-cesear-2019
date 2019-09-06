@@ -1,6 +1,12 @@
 cesaer challange defcon
 ---
 
+### Installation
+```
+sudo -H pip3 install -r requirements.txt
+```
+
+
 ### Usage
 To solve the first challenge:
 ```
